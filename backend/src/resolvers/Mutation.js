@@ -9,6 +9,29 @@ const Mutations = {
         }, info)
 
         return item
+    },
+
+    updateItem(parent, args, ctx, info) {
+        // get a copy from updates
+        const updates = {...args}
+        // remove id from updates because id cannot be changed
+        delete updates.id
+        // now update the db
+        return ctx.db.mutation.updateItem({
+            data: updates,
+            where: {
+                id: args.id
+            }
+        }, info)
+    },
+
+    async deleteItem(parent, args, ctx, info) {
+        const where = {id: args.id}
+        // get selected data
+        const item = await ctx.db.query.item({where}, `{ id title }`)
+        // check if they own the item, or have permission
+        // TODO
+        return ctx.db.mutation.deleteItem({where}, info)
     }
 };
 

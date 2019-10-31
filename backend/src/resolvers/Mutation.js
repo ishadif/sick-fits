@@ -1,3 +1,10 @@
-const mutations = {};
+let dogs = []
+const Mutation = {
+    addDog(parent, args, ctx, info) {
+        dogs.push({name: args.name})
 
-module.exports = mutations;
+        return args
+    }
+};
+
+module.exports = {Mutation, dogs};

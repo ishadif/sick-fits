@@ -1,9 +1,9 @@
-import CreateItem from '../components/CreateItem'
+import Link from 'next/link'
 
-const Sell = props => (
+const Sell = () => (
     <div>
-        <CreateItem />
+        <h1>sell page</h1>
     </div>
 )
 
-export default Sell;
+export default Sell

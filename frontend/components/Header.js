@@ -1,18 +1,23 @@
-import Nav from './Nav';
-import Link from 'next/link';
-import styled from 'styled-components';
-import Router from 'next/router';
-import NProgress from 'nprogress';
+import styled from 'styled-components'
+import Link from 'next/link'
+import Router from 'next/router'
+import NProgress from 'nprogress'
+import Nav from './Nav'
 
 Router.onRouteChangeStart = () => {
-    NProgress.start();
+    NProgress.start()
 }
 Router.onRouteChangeComplete = () => {
-    NProgress.done();
+    NProgress.done()
 }
 Router.onRouteChangeError = () => {
-    console.log('error triggered')
+    NProgress.done()
 }
+
+NProgress.configure({
+    showSpinner: false
+})
+
 
 const Logo = styled.h1`
     font-size: 4rem;
@@ -22,25 +27,27 @@ const Logo = styled.h1`
     transform: skew(-7deg);
     a {
         padding: .5rem 1rem;
-        background: ${props => props.theme.red};
         color: white;
+        background-color: ${props => props.theme.red};
         text-transform: uppercase;
         text-decoration: none;
     }
 
-    @media(max-width: 1300px) {
+    @media (max-width: 1300px) {
         margin: 0;
         text-align: center;
     }
-`;
+`
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.div`
     .bar {
         border-bottom: 10px solid ${props => props.theme.black};
         display: grid;
+        grid-template-columns: auto 1fr;
         justify-content: space-between;
         align-items: stretch;
-        @media(max-width: 1300px) {
+
+        @media (max-width: 1300px) {
             grid-template-columns: 1fr;
             justify-content: center;
         }
@@ -50,23 +57,24 @@ const StyledHeader = styled.header`
         grid-template-columns: 1fr auto;
         border-bottom: 1px solid ${props => props.theme.lightgrey};
     }
-`;
+`
 
 const Header = () => (
     <StyledHeader>
         <div className="bar">
             <Logo>
                 <Link href="/">
-                    <a>Sick Fits</a>
+                    <a>sick fits</a>
                 </Link>
             </Logo>
             <Nav />
         </div>
+
         <div className="sub-bar">
             <p>search</p>
         </div>
-        <div>cart</div>
+        <div>Cart</div>
     </StyledHeader>
 )
 
-export default Header;
+export default Header
